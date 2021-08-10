@@ -8,17 +8,19 @@ import Card from "./Card";
 
 export default function ExpressionContainer(props) {
 
-  const { expressionsTypes, selectExpressionHandler, onGoBack, showGoBack } = props
+  const { expressions, selectExpressionHandler, onGoBack, showGoBack } = props
+
   return(
     <View>
       <ScrollView>
         <View style={styles.container}>
           {
-            expressionsTypes.map(expressionType =>
-              <Card key={expressionType.id}
-                    id={expressionType.id}
-                    title={expressionType.title}
-                    image={expressionType.image}
+            expressions.map(expression =>
+              <Card key={expression.id}
+                    id={expression.id}
+                    title={expression.title}
+                    image={expression.image}
+                    type={expression.type}
                     onClick={selectExpressionHandler}
               />
             )

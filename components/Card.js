@@ -16,11 +16,11 @@ export default function Card(props){
     CardComponent = TouchableNativeFeedback
   }
 
-  const { id, title, onClick } = props
+  const { id, type, title, onClick } = props
 
  return(
    <View style={styles.card}>
-     <CardComponent onPress={() => onClick(id)} activeOpacity={0.6}>
+     <CardComponent onPress={() => onClick(id, type)} activeOpacity={0.6}>
        <View style={styles.cardTitleContainer}>
         <Text style={styles.cardTitle}>{title}</Text>
        </View>
