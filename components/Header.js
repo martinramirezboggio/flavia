@@ -2,30 +2,34 @@ import React from "react"
 import {
   ScrollView,
   View,
-  Text,
   StyleSheet
 } from 'react-native'
 import MainButton from "./MainButton";
 import Colors from "../constants/colors"
 import Card from "./Card";
+import { Feather } from "@expo/vector-icons";
+import colors from "../constants/colors";
 
 export default function Header(props){
-  const { selectedExpressions, onDeleteSelectedExpressions } = props;
+  const { selectedExpressions, onDeleteSelectedExpressions,onPlay } = props;
 
   //TODO - Move right when adding a new one 
 
   return(
     <View style={styles.headerContainer}>
-      <ScrollView style={styles.expressionsContainer} horizontal={true}>
+      <ScrollView 
+        style={styles.expressionsContainer} 
+        horizontal={true}
+      >
         {
             !!selectedExpressions.length && 
-            selectedExpressions.map( expression => 
-              <Card key={expression.title}
+            selectedExpressions.map((expression,index) => 
+              <Card key={`${expression.title}-${index}`}
                     id={expression.id}
                     title={expression.title}
                     image={expression.image}
                     type={expression.type}
-                    onClick={ () => console.log('hi', expression.title)}
+                    onClick={ () => console.warn('hi', expression.title)}
               />
             ) 
           }
@@ -34,14 +38,13 @@ export default function Header(props){
         <MainButton 
           disabled={ !selectedExpressions.length }
           onPress={onDeleteSelectedExpressions}
-        >
-            Delete
-        </MainButton>
+          icon={<Feather name="delete" size={30} color={colors.red} />}
+        />
         <MainButton
           disabled={ !selectedExpressions.length }
-        >
-          Play
-        </MainButton>
+          onPress={onPlay}
+          icon={<Feather name="play" size={30} color={colors.blue} />}
+        />
       </View>
     </View>
   )

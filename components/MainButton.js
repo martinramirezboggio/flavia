@@ -15,11 +15,24 @@ export default function MainButton(props){
   if(Platform.OS === 'android' && Platform.Version >=21) {
     ButtonComponent = TouchableNativeFeedback
   }
+  const {
+    onPress,
+    disabled,
+    label,
+    icon,
+  } = props
+
   return(
     <View style={styles.buttonContainer}>
-      <ButtonComponent onPress={props.onPress} activeOpacity={0.6} disabled={ props.disabled }>
+      <ButtonComponent onPress={onPress} activeOpacity={0.6} disabled={ disabled }>
         <View style={styles.button}>
-          <Text style={styles.buttonText}>{props.children}</Text>
+          {
+            icon && icon
+          }
+          
+          {
+           label && <Text style={styles.buttonText}>{label}</Text>
+          }
         </View>
       </ButtonComponent>
     </View>

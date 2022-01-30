@@ -1,19 +1,21 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react"
 import {
   View,
   ScrollView,
-  StyleSheet, Text, Button
+  StyleSheet,
 } from 'react-native'
 import Card from "./Card";
+import CustomButton from "./CustomButton";
 
 export default function ExpressionContainer(props) {
 
   const { expressions, selectExpressionHandler, onGoBack, showGoBack } = props
 
   return(
-    <View>
+    <View style={styles.container}>
       <ScrollView>
-        <View style={styles.container}>
+        <View style={styles.expressionContainer}>
           {
             expressions.map(expression =>
               <Card key={expression.id}
@@ -27,9 +29,14 @@ export default function ExpressionContainer(props) {
           }
         </View>
       </ScrollView>
-      <View>
+      <View style={styles.goBackBtn}>
         {
-          showGoBack && <Button onPress={onGoBack} title="Regresar" />
+          showGoBack && 
+            <CustomButton 
+              onPress={onGoBack} 
+              label="Regresar" 
+              icon={ <Ionicons name='arrow-back-circle-outline' size={25} color='white' />}
+            />
         }
       </View>
     </View>
@@ -37,12 +44,19 @@ export default function ExpressionContainer(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    width: '100%',
+    flexDirection: "column",
+    justifyContent: 'space-between',
+  },
+  expressionContainer: {
+    width: '80%',
     flexDirection: "row",
     paddingTop: 30,
     paddingLeft: 20,
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+  },
+  goBackBtn:{
+    marginBottom: 20,
   }
 })
